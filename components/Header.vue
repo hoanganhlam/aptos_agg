@@ -1,12 +1,12 @@
 <template>
   <header>
-    <div class="px-12 py-6 mx-auto flex gap-4 items-center justify-between font-bold">
+    <div class="px-4 md:px-12 py-6 mx-auto flex gap-4 items-center justify-between font-bold">
       <div class="flex-1 flex items-center gap-6">
         <nuxt-link class="w-32" to="/">
           <img src="/logo.png" alt="Ongoing Airdrop">
         </nuxt-link>
         <div class="flex-1 flex items-center gap-3">
-          <div class="flex gap-8 font-bold">
+          <div class="hidden md:flex gap-8 font-bold">
             <nuxt-link to="/">Collection</nuxt-link>
             <nuxt-link to="/">Swap</nuxt-link>
             <nuxt-link to="/">NFT Staking</nuxt-link>
@@ -18,10 +18,10 @@
         <client-only>
           <div
               v-if="!loggedIn"
-              class="p-2 px-6 flex items-center cursor-pointer bg-[#2D398D] text-white rounded-full"
+              class="p-2 px-3 md:px-6 flex items-center cursor-pointer bg-[#2D398D] text-white rounded-full"
               @click="openConnect()"
           >
-            <span class="font-bold hidden md:block px-1">{{ getUserName }}</span>
+            <span class="font-bold px-1">{{ getUserName }}</span>
           </div>
           <tippy v-else arrow interactive trigger="click" placement="bottom-start">
             <template v-slot:trigger>
@@ -29,8 +29,7 @@
                 <div class="fill-white">
                   <img class="w-5 h-5" :src="`/wallets/${connectedWallet}.png`" alt="">
                 </div>
-                <icon name="drag"/>
-                <span class="font-bold hidden md:block px-1">{{ getUserName }}</span>
+                <span class="font-bold px-1">{{ getUserName }}</span>
               </div>
             </template>
             <div class="w-36 text-left">

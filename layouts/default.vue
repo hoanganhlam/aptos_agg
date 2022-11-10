@@ -12,11 +12,11 @@
       <adapter/>
     </div>
     <div class="bg-[#111827] py-12 text-white">
-      <div class="max-w-7xl mx-auto grid grid-cols-3">
-        <div class="space-y-5">
+      <div class="max-w-6xl px-6 mx-auto grid md:grid-cols-3 gap-6">
+        <div class="space-y-4">
           <img class="w-60" src="/logo_light.png" alt="">
         </div>
-        <div class="space-y-5">
+        <div class="space-y-4">
           <div class="font-bold">Quick links</div>
           <div class="grid grid-cols-2">
             <div class="space-y-2">
@@ -32,7 +32,7 @@
             </div>
           </div>
         </div>
-        <div class="space-y-5">
+        <div class="space-y-4">
           <div class="font-bold">Stay in the loop</div>
           <p class="text-sm">Join our mailing list to stay in the loop with our newest feature releases, NFT drops, and tips and tricks for navigating NFTs.</p>
         </div>
