@@ -9,11 +9,13 @@
               Trending
             </div>
             <div
+                v-if="false"
                 class="rounded-full cursor-pointer py-2 px-6 bg-gray-100 font-semibold text-bold flex justify-center gap-2">
               <icon name="gallery"/>
               <span>Sweeps</span>
             </div>
             <div
+                v-if="false"
                 class="rounded-full cursor-pointer py-2 px-6 bg-gray-100 font-semibold text-bold flex justify-center gap-2">
               <icon name="star"/>
               <span>Favourite</span>
@@ -43,7 +45,9 @@
               <table class="min-w-full divide-y divide-gray-300">
                 <thead>
                 <tr>
-                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 md:pl-0">Collection</th>
+                  <th scope="col"
+                      class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 md:pl-0">Collection
+                  </th>
                   <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">24h volume</th>
                   <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">24h</th>
                   <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Floor Price</th>
@@ -52,14 +56,21 @@
                 </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
-                <tr>
-                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 md:pl-0">Lindsay Walton</td>
-                  <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">Front-end Developer</td>
-                  <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">lindsay.walton@example.com</td>
-                  <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">Member</td>
-                  <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">Member</td>
+                <tr v-for="item in querySet" :key="item.collection_id">
+                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 md:pl-0">
+                    <div class="flex gap-3 items-center">
+                      <div class="w-8 h-8">
+                        <img v-if="item.logo_uri" :src="item.logo_uri" alt="">
+                      </div>
+                      <span>{{ item.name }}</span>
+                    </div>
+                  </td>
+                  <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ priceWei(item.total_volume) }}</td>
+                  <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ priceWei(item.floor_24) }}</td>
+                  <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ priceWei(item.floor) }}</td>
+                  <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ item.num_unique_owners.toLocaleString() }}</td>
                   <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 md:pr-0">
-                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit<span class="sr-only">, Lindsay Walton</span></a>
+                    {{item.max_amount.toLocaleString()}}
                   </td>
                 </tr>
                 </tbody>
@@ -77,11 +88,17 @@ export default {
   name: "DiscoveryPage",
   data() {
     return {
-      dateRanges: ["24h", "1d", "30D"]
+      dateRanges: ["24h", "1d", "30D"],
+      querySet: []
     }
   },
   async fetch() {
-    const res = await this.$axios.$get('https://api.aptosgem.xyz/getCollections')
+    this.querySet = await this.$axios.$get('https://api.aptosgem.xyz/getCollections').then(res => res.data)
+  },
+  methods: {
+    priceWei(str) {
+      return str ? Number.parseFloat((Number.parseInt(str) / Math.pow(10, 8)).toFixed(4)) : "_"
+    }
   }
 }
 </script>
