@@ -92,7 +92,7 @@ export default {
     return {
       dateRanges: ["24h", "1d", "30D"],
       querySet: [],
-      ipfs_gateway: ['https://ipfs.io/ipfs/', 'https://ipns.co/', 'https://hardbin.com/ipfs/', 'https://dweb.link/ipfs/', 'https://cloudflare-ipfs.com/ipfs/', 'https://gateway.pinata.cloud/ipfs/', 'https://gateway.ipfs.io/ipfs/']
+      ipfs_gateway: ['https://ipfs.io/ipfs/', 'https://dweb.link/ipfs/', 'https://cloudflare-ipfs.com/ipfs/', 'https://gateway.pinata.cloud/ipfs/', 'https://gateway.ipfs.io/ipfs/']
     }
   },
   async fetch() {

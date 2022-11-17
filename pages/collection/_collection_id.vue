@@ -71,7 +71,7 @@ export default {
         collection_info: [],
         collection_nfts: [],
         collection_name: this.$route.params.collection_id,
-        ipfs_gateway: ['https://ipfs.io/ipfs/', 'https://ipns.co/', 'https://hardbin.com/ipfs/', 'https://dweb.link/ipfs/', 'https://cloudflare-ipfs.com/ipfs/', 'https://gateway.pinata.cloud/ipfs/', 'https://gateway.ipfs.io/ipfs/']
+        ipfs_gateway: ['https://ipfs.io/ipfs/', 'https://dweb.link/ipfs/', 'https://cloudflare-ipfs.com/ipfs/', 'https://gateway.pinata.cloud/ipfs/', 'https://gateway.ipfs.io/ipfs/']
     } 
   },
   async fetch() {
