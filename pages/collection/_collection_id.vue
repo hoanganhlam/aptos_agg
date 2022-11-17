@@ -4,7 +4,9 @@
       <div class="w-full flex justify-between py-8 items-start">
         <div class="flex">
           <img
-              src="https://www.topaz.so/cdn-cgi/image/width=512,quality=90,fit=scale-down/https://cloudflare-ipfs.com/ipfs/Qmf598wfDyaP8HXsHMdVFKYZPmKAGjRmCKGqiuCLWVKYGR"
+              :src="collection_info.logo_uri  || '/none_image.png'"
+              @error="setErrorImg"
+              alt="logo collection"
               class="h-36 w-36 flex-shrink-0 rounded-xl border-4 border-white bg-gray-200 object-cover drop-shadow-md dark:border-stone-500 mr-8"
           />
           <div class="text-white">
@@ -144,7 +146,7 @@
         <!-- <div class="text-4xl">Discover more NFTs</div> -->
         <div class="grid md:grid-cols-4 gap-4">
           <div v-for="(item) in collection_nfts" :key="item.token_name" class="p-3 bg-white rounded-xl">
-            <img :src="item.image_url" @error="setErrorImg" alt="">
+            <img :src="prettyImg(item.preview_uri, item.image_url)" @error="setErrorImg" alt="">
             <div class="pt-4 text-black space-y-3">
               <!-- <div class="flex gap-3 items-center">
                 <div class="w-8 h-8">
@@ -195,7 +197,7 @@ export default {
         collection_info: [],
         collection_nfts: [],
         collection_name: this.$route.params.collection_id,
-        ipfs_gateway: ['https://ipfs.io/ipfs/', 'https://dweb.link/ipfs/']
+        ipfs_gateway: ['https://ipfs.io/ipfs/', 'https://dweb.link/ipfs/', 'https://cloudflare-ipfs.com/ipfs/']
     } 
   },
   async fetch() {
@@ -228,6 +230,12 @@ export default {
     },
     prettyInt(num) {
       return num ? num.toLocaleString() : "_"
+    },
+    prettyImg(url1, url2) {
+      const url = url1 || url2
+      if (!url) return ""
+      const ipfs_gw = this.ipfs_gateway[Math.floor(Math.random()*this.ipfs_gateway.length)];
+      return url.replace('ipfs://', ipfs_gw).replace('https://nftstorage.link/ipfs/', ipfs_gw)
     },
     shortenAddress(str) {
       if (!str) return "_"

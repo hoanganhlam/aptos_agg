@@ -117,7 +117,6 @@ export default {
       }
       return x
     })
-    console.log('done', this.querySet);
   },
   methods: {
     priceWei(str) {
