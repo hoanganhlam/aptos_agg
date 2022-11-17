@@ -95,21 +95,12 @@ export default {
   },
   methods: {
     setErrorImg(event) { 
-      event.target.src = "none_image.jpg"
+      event.target.src = "/none_image.png"
     }, 
     priceWei(str) {
       return str ? Number.parseFloat((Number.parseInt(str) / Math.pow(10, 8)).toFixed(4)).toLocaleString() : "_"
     },
     async buyNow(item) {
-  //       "arguments": [
-  //   "0x931f97b9f9c62bd1897a724228fea7bcc44d6a6175eb159bb871ce2c4687eeab", //seller
-  //   "40000000", // price
-  //   "1",
-  //   "0x98d6b9ac47a603d1bff5da0ada61a9ad4ddf1314d14663e444d66e5e161893ad", //creator
-  //   "My Ducks", // collectio name
-  //   "My Ducks1154", //nft name
-  //   "0" //0
-  // ],
       const tx_payload = {
         function: "0x2c7bccf7b31baf770fdbcc768d9e9cb3d87805e255355df5db32ac9a669010a2::marketplace_v2::buy",
         type_arguments: ["0x1::aptos_coin::AptosCoin"],
@@ -121,11 +112,6 @@ export default {
             item.collection_id.split("::")[1],
             item.token_name,
             item.property_version,
-            // []
-            // [item.collection_id.split("::")[0]],
-            // [item.collection_id.split("::")[1]],
-            // [item.token_name],
-            // [item.price.toString()]
           ]
         }
       if (this.$store.state.auth.account) {
