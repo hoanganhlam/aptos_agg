@@ -195,7 +195,7 @@ export default {
         collection_info: [],
         collection_nfts: [],
         collection_name: this.$route.params.collection_id,
-        ipfs_gateway: ['https://ipfs.io/ipfs/', 'https://dweb.link/ipfs/', 'https://cloudflare-ipfs.com/ipfs/', 'https://gateway.pinata.cloud/ipfs/']
+        ipfs_gateway: ['https://ipfs.io/ipfs/', 'https://dweb.link/ipfs/']
     } 
   },
   async fetch() {
@@ -205,8 +205,8 @@ export default {
       return url.replace('ipfs://', ipfs_gw).replace('https://nftstorage.link/ipfs/', ipfs_gw)
     }
     // this.collection_info = await this.$axios.$get('https://api.aptosgem.xyz/collection_info?collection='+this.collection_name).then(res => res.data)
-    const collection_nfts = await this.$axios.$get('https://api.aptosgem.xyz/collection_nfts?collection='+this.collection_name).then(res => res.data)
-    this.collection_nfts = collection_nfts;
+    const collection_nfts = await this.$axios.$get('https://api.aptosgem.xyz/collection_nfts?collection='+this.collection_name).then(res => res.data.splice(0, 20))
+    this.collection_nfts = collection_nfts
     const res = await Promise.allSettled(
       collection_nfts.map(x => {
           return this.$axios.$get(pretty_url(x.token_uri), {timeout: 3000})
