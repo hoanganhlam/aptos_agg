@@ -1,7 +1,145 @@
 <template>
   <div>
-    <div class="py-16 bg-linear text-white">
-        <h2 class="text-5xl my-6 md:my-10 text-center">The Best NFT Aggregator for APTOS</h2>
+    <div class="py-4 px-8 bg-linear text-white">
+      <div class="w-full flex justify-between py-8 items-start">
+        <div class="flex">
+          <img
+              src="https://www.topaz.so/cdn-cgi/image/width=512,quality=90,fit=scale-down/https://cloudflare-ipfs.com/ipfs/Qmf598wfDyaP8HXsHMdVFKYZPmKAGjRmCKGqiuCLWVKYGR"
+              class="h-36 w-36 flex-shrink-0 rounded-xl border-4 border-white bg-gray-200 object-cover drop-shadow-md dark:border-stone-500 mr-8"
+          />
+          <div class="text-white">
+            <p class="text-2xl font-semibold mb-3">
+              {{ collection_info.name }}
+            </p>
+            <p class="text-xs mb-3">
+              Created by
+              <span class="underline">{{shortenAddress(collection_info.collection_id)}}</span>
+              • {{prettyFloat(collection_info.royal_fee)}}% creator royalty
+            </p>
+            <p class="text-base ">
+              {{collection_info.description}}
+            </p>
+          </div>
+        </div>
+        <div class="my-2 flex flex-row justify-center gap-1 md:my-0">
+
+          <div class="ml-3 border-l-2 border-black/20 pl-4 dark:border-white/20">
+          </div>
+        </div>
+      </div>
+      <div
+          class="flex-row-2 flex-col-2 md:flex-col-4 md:flex-row-1 flex flex-row flex-wrap
+          justify-center gap-2 md:justify-start"
+      >
+        <div
+            class="w-[150px] flex h-full cursor-pointer flex-col items-start items-center justify-start rounded-lg border-2 border-gray-300 px-3 py-2 dark:border-stone-700  md:w-auto md:gap-2">
+          <div class="text-center text-xs text-gray-500 dark:text-stone-500">Floor Price</div>
+          <div
+              class="flex flex-row items-center justify-center gap-2 pt-2 text-center text-sm dark:text-stone-300 md:pt-0">
+            <div class="w-4">
+              <svg data-name="Icon Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" fill="white">
+                <path
+                    d="M46.47,20.07H41.16a2.15,2.15,0,0,1-1.61-.72l-2.16-2.42a1.69,1.69,0,0,0-2.53,0L33,19a3.21,3.21,0,0,1-2.39,1.07h-29A30.26,30.26,0,0,0,0,27.48H27.42a1.78,1.78,0,0,0,1.28-.54l2.56-2.66a1.67,1.67,0,0,1,1.22-.52h.1a1.7,1.7,0,0,1,1.27.57L36,26.75a2.17,2.17,0,0,0,1.61.73H60a30.26,30.26,0,0,0-1.58-7.41h-12Z"></path>
+                <path
+                    d="M16.6,43.05a1.78,1.78,0,0,0,1.27-.54l2.56-2.66a1.7,1.7,0,0,1,1.22-.52h.1A1.7,1.7,0,0,1,23,39.9l2.15,2.42a2.14,2.14,0,0,0,1.62.73H57.12a29.73,29.73,0,0,0,2.47-7.48H30.47a2.17,2.17,0,0,1-1.62-.72L26.7,32.42a1.69,1.69,0,0,0-2.53,0L22.32,34.5a3.18,3.18,0,0,1-2.38,1.07H.41a29.73,29.73,0,0,0,2.47,7.48Z"></path>
+                <path
+                    d="M38.12,12a1.74,1.74,0,0,0,1.27-.54L42,8.78a1.69,1.69,0,0,1,1.22-.51h.1a1.69,1.69,0,0,1,1.27.56l2.15,2.43a2.17,2.17,0,0,0,1.62.72h5.77A30.19,30.19,0,0,0,5.92,12Z"></path>
+                <path
+                    d="M26.53,50.46H18.64A2.17,2.17,0,0,1,17,49.74l-2.15-2.43a1.71,1.71,0,0,0-2.53,0l-1.85,2.08a3.18,3.18,0,0,1-2.38,1.07H8a30.16,30.16,0,0,0,44,0Z"></path>
+              </svg>
+            </div>
+            <div>{{priceWei(collection_info.floor)}}</div>
+          </div>
+        </div>
+        <div
+            class="w-[150px] flex h-full flex-col items-start items-center justify-start rounded-lg border-2 border-gray-300 px-3 py-2 dark:border-stone-700  md:w-auto md:gap-2">
+          <div class="text-center text-xs text-gray-500 dark:text-stone-500">Volume (24 hours)</div>
+          <div
+              class="flex flex-row items-center justify-center gap-2 pt-2 text-center text-sm dark:text-stone-300 md:pt-0">
+            <div class="flex flex-row items-center gap-2">
+              <div class="w-4">
+                <svg data-name="Icon Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" fill="white">
+                  <path
+                      d="M46.47,20.07H41.16a2.15,2.15,0,0,1-1.61-.72l-2.16-2.42a1.69,1.69,0,0,0-2.53,0L33,19a3.21,3.21,0,0,1-2.39,1.07h-29A30.26,30.26,0,0,0,0,27.48H27.42a1.78,1.78,0,0,0,1.28-.54l2.56-2.66a1.67,1.67,0,0,1,1.22-.52h.1a1.7,1.7,0,0,1,1.27.57L36,26.75a2.17,2.17,0,0,0,1.61.73H60a30.26,30.26,0,0,0-1.58-7.41h-12Z"></path>
+                  <path
+                      d="M16.6,43.05a1.78,1.78,0,0,0,1.27-.54l2.56-2.66a1.7,1.7,0,0,1,1.22-.52h.1A1.7,1.7,0,0,1,23,39.9l2.15,2.42a2.14,2.14,0,0,0,1.62.73H57.12a29.73,29.73,0,0,0,2.47-7.48H30.47a2.17,2.17,0,0,1-1.62-.72L26.7,32.42a1.69,1.69,0,0,0-2.53,0L22.32,34.5a3.18,3.18,0,0,1-2.38,1.07H.41a29.73,29.73,0,0,0,2.47,7.48Z"></path>
+                  <path
+                      d="M38.12,12a1.74,1.74,0,0,0,1.27-.54L42,8.78a1.69,1.69,0,0,1,1.22-.51h.1a1.69,1.69,0,0,1,1.27.56l2.15,2.43a2.17,2.17,0,0,0,1.62.72h5.77A30.19,30.19,0,0,0,5.92,12Z"></path>
+                  <path
+                      d="M26.53,50.46H18.64A2.17,2.17,0,0,1,17,49.74l-2.15-2.43a1.71,1.71,0,0,0-2.53,0l-1.85,2.08a3.18,3.18,0,0,1-2.38,1.07H8a30.16,30.16,0,0,0,44,0Z"></path>
+                </svg>
+              </div>
+              <div>{{priceWei(collection_info.volume_24)}}</div>
+            </div>
+          </div>
+        </div>
+        <div
+            class="w-[150px] flex h-full flex-col items-start items-center justify-start rounded-lg
+              border-2 border-gray-300 px-3 py-2 dark:border-stone-700 
+              md:w-auto md:gap-2"
+        >
+          <div class="text-center text-xs text-gray-500 dark:text-stone-500">
+            Total Volume
+          </div>
+          <div
+              class="flex flex-row items-center justify-center gap-2 pt-2 text-center text-sm dark:text-stone-300 md:pt-0">
+            <div class="flex flex-row items-center gap-2">
+              <div class="w-4">
+                <svg data-name="Icon Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" fill="white">
+                  <path
+                      d="M46.47,20.07H41.16a2.15,2.15,0,0,1-1.61-.72l-2.16-2.42a1.69,1.69,0,0,0-2.53,0L33,19a3.21,3.21,0,0,1-2.39,1.07h-29A30.26,30.26,0,0,0,0,27.48H27.42a1.78,1.78,0,0,0,1.28-.54l2.56-2.66a1.67,1.67,0,0,1,1.22-.52h.1a1.7,1.7,0,0,1,1.27.57L36,26.75a2.17,2.17,0,0,0,1.61.73H60a30.26,30.26,0,0,0-1.58-7.41h-12Z"></path>
+                  <path
+                      d="M16.6,43.05a1.78,1.78,0,0,0,1.27-.54l2.56-2.66a1.7,1.7,0,0,1,1.22-.52h.1A1.7,1.7,0,0,1,23,39.9l2.15,2.42a2.14,2.14,0,0,0,1.62.73H57.12a29.73,29.73,0,0,0,2.47-7.48H30.47a2.17,2.17,0,0,1-1.62-.72L26.7,32.42a1.69,1.69,0,0,0-2.53,0L22.32,34.5a3.18,3.18,0,0,1-2.38,1.07H.41a29.73,29.73,0,0,0,2.47,7.48Z"></path>
+                  <path
+                      d="M38.12,12a1.74,1.74,0,0,0,1.27-.54L42,8.78a1.69,1.69,0,0,1,1.22-.51h.1a1.69,1.69,0,0,1,1.27.56l2.15,2.43a2.17,2.17,0,0,0,1.62.72h5.77A30.19,30.19,0,0,0,5.92,12Z"></path>
+                  <path
+                      d="M26.53,50.46H18.64A2.17,2.17,0,0,1,17,49.74l-2.15-2.43a1.71,1.71,0,0,0-2.53,0l-1.85,2.08a3.18,3.18,0,0,1-2.38,1.07H8a30.16,30.16,0,0,0,44,0Z"></path>
+                </svg>
+              </div>
+              <div>{{priceWei(collection_info.total_volume)}}</div>
+            </div>
+          </div>
+        </div>
+        <div
+            class="w-[150px] flex h-full flex-col items-start items-center justify-start rounded-lg border-2 border-gray-300 px-3 py-2 dark:border-stone-700  md:w-auto md:gap-2">
+          <div class="text-center text-xs text-gray-500 dark:text-stone-500">Items</div>
+          <div
+              class="flex flex-row items-center justify-center gap-2 pt-2 text-center text-sm dark:text-stone-300 md:pt-0">
+            {{prettyInt(collection_info.num_tokens)}}
+          </div>
+        </div>
+        <div
+            class="w-[150px] flex h-full cursor-pointer flex-col items-start items-center justify-start rounded-lg border-2 border-gray-300 px-3 py-2 dark:border-stone-700  md:w-auto md:gap-2">
+          <div class="text-center text-xs text-gray-500 dark:text-stone-500">Owners</div>
+          <div
+              class="flex flex-row items-center justify-center gap-2 pt-2 text-center text-sm dark:text-stone-300 md:pt-0">
+            {{prettyInt(collection_info.num_unique_owners)}}
+          </div>
+        </div>
+      </div>
+      <!-- <div class="w-full flex justify-end my-8">
+        <div class="hidden w-[400px] flex-row items-center gap-1 rounded-xl border-2 border-gray-300 px-4 text-gray-400 hover:cursor-not-allowed dark:border-stone-600 xl:flex">
+          <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              width="1em"
+              height="1em"
+              fill="currentColor"
+              class="h-5 w-5"
+          >
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z">
+            </path>
+          </svg>
+          <input
+              v-model="textSearch"
+              type="text"
+              class="h-10 w-full border-0 bg-transparent text-sm text-black placeholder:text-gray-400 focus:ring-0 dark:text-white"
+              placeholder="Search by item name"
+          >
+        </div>
+      </div> -->
+    </div>
+    <div class="pt-16 md:pb-16 pb-16 bg-gray-100">
       <div class="px-4 max-w-6xl mx-auto space-y-10">
         <!-- <div class="text-4xl">Discover more NFTs</div> -->
         <div class="grid md:grid-cols-4 gap-4">
@@ -38,24 +176,10 @@
                 <!-- <div class="text-[#838383]">1 of 321</div> -->
               </div>
               <div class="flex justify-between items-center">
-                <div @click="buyNow(item)" class="py-2 px-3 rounded-full bg-[#EEEEEE] text-xs">Buy Now</div>
+                <div @click="buyNow(item)" class="py-2 px-3 cursor-pointer hover:bg-yellow-100 dark:hover:bg-[#cacaca] rounded-full bg-[#EEEEEE] text-xs">Buy Now</div>
                 <!-- <div class="">Place a bid</div> -->
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="pt-16 md:pb-16 pb-16">
-      <div class="px-4 max-w-6xl mx-auto md:flex items-center gap-48">
-        <div class="md:w-1/3">
-          <img src="/s6/1.png" alt="">
-        </div>
-        <div class="flex-1">
-          <h2 class="text-4xl text-[#2D398D]">Earn free crypto with APTOSGEM</h2>
-          <p class="text-lg text-[#111827] mb-12">Platform for NFT users to create ultilitites for their collection</p>
-          <div class="inline-flex rounded-full cursor-pointer py-2 px-6 bg-[#2D398D] text-white font-semibold">
-            Start Earning
           </div>
         </div>
       </div>
@@ -71,16 +195,18 @@ export default {
         collection_info: [],
         collection_nfts: [],
         collection_name: this.$route.params.collection_id,
-        ipfs_gateway: ['https://ipfs.io/ipfs/', 'https://dweb.link/ipfs/', 'https://cloudflare-ipfs.com/ipfs/', 'https://gateway.pinata.cloud/ipfs/', 'https://gateway.ipfs.io/ipfs/']
+        ipfs_gateway: ['https://ipfs.io/ipfs/', 'https://dweb.link/ipfs/', 'https://cloudflare-ipfs.com/ipfs/', 'https://gateway.pinata.cloud/ipfs/']
     } 
   },
   async fetch() {
+    this.collection_info = await this.$axios.$get('https://api.aptosgem.xyz/collection_info?collection='+this.collection_name).then(res => res.data)
     const pretty_url = (url)  => {
       const ipfs_gw = this.ipfs_gateway[Math.floor(Math.random()*this.ipfs_gateway.length)];
       return url.replace('ipfs://', ipfs_gw).replace('https://nftstorage.link/ipfs/', ipfs_gw)
     }
     // this.collection_info = await this.$axios.$get('https://api.aptosgem.xyz/collection_info?collection='+this.collection_name).then(res => res.data)
     const collection_nfts = await this.$axios.$get('https://api.aptosgem.xyz/collection_nfts?collection='+this.collection_name).then(res => res.data)
+    this.collection_nfts = collection_nfts;
     const res = await Promise.allSettled(
       collection_nfts.map(x => {
           return this.$axios.$get(pretty_url(x.token_uri), {timeout: 3000})
@@ -99,6 +225,18 @@ export default {
     }, 
     priceWei(str) {
       return str ? Number.parseFloat((Number.parseInt(str) / Math.pow(10, 8)).toFixed(4)).toLocaleString() : "_"
+    },
+    prettyInt(num) {
+      return num ? num.toLocaleString() : "_"
+    },
+    shortenAddress(str) {
+      if (!str) return "_"
+      const first5 = str.split('::')[0].slice(0,8);
+      const last5 = str.split('::')[0].slice(-5);
+      return first5 + '...' + last5;
+    },
+    prettyFloat(num) {
+      return (num * 100).toFixed(1)
     },
     async buyNow(item) {
       const tx_payload = {

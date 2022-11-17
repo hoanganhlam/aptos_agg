@@ -104,6 +104,7 @@ export default {
     }
 
     const collection_set = await this.$axios.$get('https://api.aptosgem.xyz/getCollections').then(res => res.data)
+    this.querySet = collection_set;
     const res = await Promise.allSettled(
       collection_set.map(x => {
           return this.$axios.$get(pretty_url(x.uri), {timeout: 3000})
