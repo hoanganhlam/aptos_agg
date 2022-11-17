@@ -45,32 +45,34 @@
               <table class="min-w-full divide-y divide-gray-300">
                 <thead>
                 <tr>
+                  <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Rank</th>
                   <th scope="col"
                       class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 md:pl-0">Collection
                   </th>
                   <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">24h volume</th>
-                  <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">24h</th>
+                  <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Total Volume</th>
                   <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Floor Price</th>
                   <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Owners</th>
                   <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 md:pr-0">Supply</th>
                 </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
-                <tr v-for="item in querySet" :key="item.collection_id">
+                <tr v-for="(item,index) in querySet" :key="item.collection_id">
+                  <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ index + 1 }}</td>
                   <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 md:pl-0">
                     <div class="flex gap-3 items-center">
                       <div class="w-8 h-8">
                         <img v-if="item.logo_uri" :src="item.logo_uri" alt="">
                       </div>
-                      <span>{{ item.name }}</span>
+                      <nuxt-link :to="`/collection/${item.collection_id}`">{{ item.name }}</nuxt-link>
                     </div>
                   </td>
+                  <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ priceWei(item.volume_24) }}</td>
                   <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ priceWei(item.total_volume) }}</td>
-                  <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ priceWei(item.floor_24) }}</td>
                   <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ priceWei(item.floor) }}</td>
                   <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ item.num_unique_owners.toLocaleString() }}</td>
                   <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 md:pr-0">
-                    {{item.max_amount.toLocaleString()}}
+                    {{item.num_tokens.toLocaleString()}}
                   </td>
                 </tr>
                 </tbody>
@@ -94,11 +96,21 @@ export default {
   },
   async fetch() {
     this.querySet = await this.$axios.$get('https://api.aptosgem.xyz/getCollections').then(res => res.data)
+    for (let index = 0; index < this.querySet.length; index++) {
+      const set = this.querySet[index];
+      if (!set.logo_uri) {
+        const newUri = set.uri.replace("ipfs://", "https://ipfs.io/ipfs/");
+        const ipfs_0 = await this.$axios.$get(newUri);
+        this.querySet[index].logo_uri = ipfs_0.image;
+      } else {
+        this.querySet[index].logo_uri = set.logo_uri.replace("ipfs://", "https://ipfs.io/ipfs/")
+      }
+    }
   },
   methods: {
     priceWei(str) {
-      return str ? Number.parseFloat((Number.parseInt(str) / Math.pow(10, 8)).toFixed(4)) : "_"
-    }
+      return str ? Number.parseFloat((Number.parseInt(str) / Math.pow(10, 8)).toFixed(4)).toLocaleString() : "_"
+    },
   }
 }
 </script>

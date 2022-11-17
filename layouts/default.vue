@@ -51,7 +51,7 @@ export default {
   components: {PHeader, Adapter},
   head() {
     return {
-      title: "APTOS_BASE",
+      title: "AptosGem - Platform for NFT users to create ultilitites for their collection",
       meta: [
         {
           hid: 'description',
