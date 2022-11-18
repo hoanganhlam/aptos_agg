@@ -70,9 +70,9 @@
                   <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ priceWei(item.volume_24) }}</td>
                   <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ priceWei(item.total_volume) }}</td>
                   <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ priceWei(item.floor) }}</td>
-                  <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ item.num_unique_owners.toLocaleString() }}</td>
+                  <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ pretty_num(item.num_unique_owners) }}</td>
                   <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 md:pr-0">
-                    {{item.num_tokens.toLocaleString()}}
+                    {{pretty_num(item.num_tokens)}}
                   </td>
                 </tr>
                 </tbody>
@@ -91,26 +91,40 @@ export default {
   data() {
     return {
       dateRanges: ["24h", "1d", "30D"],
-      querySet: []
+      querySet: [],
+      ipfs_gateway: ['https://ipfs.io/ipfs/', 'https://dweb.link/ipfs/', 'https://cloudflare-ipfs.com/ipfs/', 'https://gateway.pinata.cloud/ipfs/', 'https://gateway.ipfs.io/ipfs/']
     }
   },
   async fetch() {
-    this.querySet = await this.$axios.$get('https://api.aptosgem.xyz/getCollections').then(res => res.data)
-    for (let index = 0; index < this.querySet.length; index++) {
-      const set = this.querySet[index];
-      if (!set.logo_uri) {
-        const newUri = set.uri.replace("ipfs://", "https://ipfs.io/ipfs/");
-        const ipfs_0 = await this.$axios.$get(newUri);
-        this.querySet[index].logo_uri = ipfs_0.image;
-      } else {
-        this.querySet[index].logo_uri = set.logo_uri.replace("ipfs://", "https://ipfs.io/ipfs/")
-      }
+
+    const pretty_url = (url)  => {
+      if (!url) return '_'
+      const ipfs_gw = this.ipfs_gateway[Math.floor(Math.random()*this.ipfs_gateway.length)];
+      return url.replace('ipfs://', ipfs_gw).replace('https://nftstorage.link/ipfs/', ipfs_gw)
     }
+
+    const collection_set = await this.$axios.$get('https://api.aptosgem.xyz/getCollections').then(res => res.data)
+    this.querySet = collection_set;
+    const res = await Promise.allSettled(
+      collection_set.map(x => {
+          return this.$axios.$get(pretty_url(x.uri), {timeout: 3000})
+      })
+    )
+
+    this.querySet = collection_set.map((x, i) => {
+      if (!res[i].reason && !x.logo_uri) {
+        x.logo_uri = pretty_url(res[i].value.image)
+      }
+      return x
+    })
   },
   methods: {
     priceWei(str) {
       return str ? Number.parseFloat((Number.parseInt(str) / Math.pow(10, 8)).toFixed(4)).toLocaleString() : "_"
     },
+    pretty_num(num) {
+      return num ? num.toLocaleString() : "_"
+    }
   }
 }
 </script>

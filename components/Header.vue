@@ -7,7 +7,7 @@
         </nuxt-link>
         <div class="flex-1 flex items-center gap-3">
           <div class="hidden md:flex gap-8 font-bold">
-            <nuxt-link to="/discovery">Collection</nuxt-link>
+            <nuxt-link to="/discovery">Discovery</nuxt-link>
             <nuxt-link to="/">Swap</nuxt-link>
             <nuxt-link to="/">NFT Staking</nuxt-link>
             <nuxt-link to="/">NFT Collaterol</nuxt-link>
