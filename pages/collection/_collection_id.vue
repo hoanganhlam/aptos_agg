@@ -1,12 +1,19 @@
 <template>
   <div>
-    <div class="py-4 px-8 bg-linear text-white">
-      <div class="w-full flex justify-between py-8 items-start">
-        <div class="flex">
+    <div class="mx-auto py-4 px-4 bg-linear text-white text-center md:text-left">
+      <div class="flex flex-col items-center md:items-start">
+        <div
+          class="
+            mb-6
+            flex
+            w-full
+            flex-col
+            items-center
+            gap-4
+            md:flex-row md:items-start
+          "
+        >
           <img
-            :src="collection_info.logo_uri || '/none_image.png'"
-            @error="setErrorImg"
-            alt="logo collection"
             class="
               h-36
               w-36
@@ -17,129 +24,152 @@
               object-cover
               drop-shadow-md
               dark:border-stone-500
-              mr-8
             "
+            :src="collection_info.logo_uri || '/none_image.png'"
+            @error="setErrorImg"
+            loading="lazy"
           />
-          <div class="text-white">
-            <p class="text-2xl font-semibold mb-3">
-              {{ collection_info.name }}
-            </p>
-            <p class="text-xs mb-3">
-              Created by
-              <span class="underline">{{
-                shortenAddress(collection_info.collection_id)
-              }}</span>
-              • {{ prettyFloat(collection_info.royal_fee) }}% creator royalty
-            </p>
-            <p class="text-base">
-              {{ collection_info.description }}
-            </p>
-          </div>
-        </div>
-        <div class="my-2 flex flex-row justify-center gap-1 md:my-0">
-          <div
-            class="ml-3 border-l-2 border-black/20 pl-4 dark:border-white/20"
-          ></div>
-        </div>
-      </div>
-      <div
-        class="
-          flex-row-2 flex-col-2
-          md:flex-col-4 md:flex-row-1
-          flex flex-row flex-wrap
-          justify-center
-          gap-2
-          md:justify-start
-        "
-      >
-        <div
-          class="
-            w-[150px]
-            flex
-            h-full
-            cursor-pointer
-            flex-col
-            items-start items-center
-            justify-start
-            rounded-lg
-            border-2 border-gray-300
-            px-3
-            py-2
-            dark:border-stone-700
-            md:w-auto md:gap-2
-          "
-        >
-          <div class="text-center text-xs text-gray-500 dark:text-stone-500">
-            Floor Price
-          </div>
-          <div
-            class="
-              flex flex-row
-              items-center
-              justify-center
-              gap-2
-              pt-2
-              text-center text-sm
-              dark:text-stone-300
-              md:pt-0
-            "
-          >
-            <div class="w-4">
-              <svg
-                data-name="Icon Logo"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 60 60"
-                fill="white"
+          <div class="w-full">
+            <div
+              class="
+                flex
+                w-full
+                flex-col
+                items-center
+                justify-center
+                gap-3
+                md:flex-row md:justify-start md:gap-4
+              "
+            >
+              <div class="flex flex-row items-center gap-2 text-2xl font-bold">
+                {{ collection_info.name }}
+              </div>
+              <div class="hidden grow md:block"></div>
+              <div
+                class="
+                  flex flex-row
+                  gap-1
+                  text-xs text-gray-500
+                  dark:text-stone-400
+                  md:hidden
+                "
               >
-                <path
-                  d="M46.47,20.07H41.16a2.15,2.15,0,0,1-1.61-.72l-2.16-2.42a1.69,1.69,0,0,0-2.53,0L33,19a3.21,3.21,0,0,1-2.39,1.07h-29A30.26,30.26,0,0,0,0,27.48H27.42a1.78,1.78,0,0,0,1.28-.54l2.56-2.66a1.67,1.67,0,0,1,1.22-.52h.1a1.7,1.7,0,0,1,1.27.57L36,26.75a2.17,2.17,0,0,0,1.61.73H60a30.26,30.26,0,0,0-1.58-7.41h-12Z"
-                ></path>
-                <path
-                  d="M16.6,43.05a1.78,1.78,0,0,0,1.27-.54l2.56-2.66a1.7,1.7,0,0,1,1.22-.52h.1A1.7,1.7,0,0,1,23,39.9l2.15,2.42a2.14,2.14,0,0,0,1.62.73H57.12a29.73,29.73,0,0,0,2.47-7.48H30.47a2.17,2.17,0,0,1-1.62-.72L26.7,32.42a1.69,1.69,0,0,0-2.53,0L22.32,34.5a3.18,3.18,0,0,1-2.38,1.07H.41a29.73,29.73,0,0,0,2.47,7.48Z"
-                ></path>
-                <path
-                  d="M38.12,12a1.74,1.74,0,0,0,1.27-.54L42,8.78a1.69,1.69,0,0,1,1.22-.51h.1a1.69,1.69,0,0,1,1.27.56l2.15,2.43a2.17,2.17,0,0,0,1.62.72h5.77A30.19,30.19,0,0,0,5.92,12Z"
-                ></path>
-                <path
-                  d="M26.53,50.46H18.64A2.17,2.17,0,0,1,17,49.74l-2.15-2.43a1.71,1.71,0,0,0-2.53,0l-1.85,2.08a3.18,3.18,0,0,1-2.38,1.07H8a30.16,30.16,0,0,0,44,0Z"
-                ></path>
-              </svg>
+                Created by
+                <a
+                  class="underline"
+                  href="https://explorer.aptoslabs.com/account/collection_info.collection_id"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >{{shortenAddress(collection_info.collection_id)}}</a
+                >
+              </div>
+              <div class="my-2 flex flex-row justify-center gap-1 md:my-0" v-if="!showSidebar">
+                <div
+                  class="
+                    ml-3
+                    border-l-2 border-black/20
+                    pl-4
+                    dark:border-white/20
+                  "
+                >
+                  <a
+                    class="
+                      flex flex-row
+                      items-center
+                      justify-center
+                      gap-3
+                      whitespace-nowrap
+                      rounded-xl
+                      bg-opacity-60
+                      px-4
+                      py-2
+                      text-sm text-black
+                      hover:bg-gray-200
+                      dark:bg-stone-700
+                      dark:text-stone-300
+                      dark:hover:bg-stone-600
+                      false
+                      bg-gray-200
+                      undefined
+                    "
+                    rel="noreferrer noopener"
+                    @click="toggleSideBar"
+                    >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+</svg>
+                    </a>
+                </div>
+              </div>
             </div>
-            <div>{{ priceWei(collection_info.floor) }}</div>
+            <div
+              class="
+                mt-2
+                hidden
+                flex-row
+                gap-1
+                text-xs text-gray-500
+                dark:text-stone-400
+                md:flex
+              "
+            >
+              Created by
+              <a
+                class="underline"
+                href="https://explorer.aptoslabs.com/account/0xf49e91c4bcf494013b8dda4155859f63b3f3ab7a01a62313c944722a31db97d1"
+                target="_blank"
+                rel="noopener noreferrer"
+                >0xf49e...db97d1</a
+              >
+              <div>• {{ prettyFloat(collection_info.royal_fee) }}% creator royalty</div>
+            </div>
+            <div
+              class="mt-4 text-left text-base text-gray-500 dark:text-stone-400"
+            >
+              {{ collection_info.description }}
+            </div>
           </div>
         </div>
         <div
           class="
-            w-[150px]
-            flex
-            h-full
-            flex-col
-            items-start items-center
-            justify-start
-            rounded-lg
-            border-2 border-gray-300
-            px-3
-            py-2
-            dark:border-stone-700
-            md:w-auto md:gap-2
+            flex-row-2 flex-col-2
+            md:flex-col-4 md:flex-row-1
+            flex flex-row flex-wrap
+            justify-center
+            gap-2
+            md:justify-start
           "
         >
-          <div class="text-center text-xs text-gray-500 dark:text-stone-500">
-            Volume (24 hours)
-          </div>
           <div
             class="
-              flex flex-row
-              items-center
-              justify-center
-              gap-2
-              pt-2
-              text-center text-sm
-              dark:text-stone-300
-              md:pt-0
+              w-[150px]
+              flex
+              h-full
+              flex-col
+              items-start items-center
+              justify-start
+              rounded-lg
+              border-2 border-gray-300
+              px-3
+              py-2
+              md:w-auto md:gap-2
             "
           >
-            <div class="flex flex-row items-center gap-2">
+            <div class="text-center text-xs text-gray-500 dark:text-stone-500">
+              Floor Price
+            </div>
+            <div
+              class="
+                flex flex-row
+                items-center
+                justify-center
+                gap-2
+                pt-2
+                text-center text-sm
+                dark:text-stone-300
+                md:pt-0
+              "
+            >
               <div class="w-4">
                 <svg
                   data-name="Icon Logo"
@@ -161,158 +191,189 @@
                   ></path>
                 </svg>
               </div>
-              <div>{{ priceWei(collection_info.volume_24) }}</div>
+              <div>{{ priceWei(collection_info.floor) }}</div>
             </div>
-          </div>
-        </div>
-        <div
-          class="
-            w-[150px]
-            flex
-            h-full
-            flex-col
-            items-start items-center
-            justify-start
-            rounded-lg
-            border-2 border-gray-300
-            px-3
-            py-2
-            dark:border-stone-700
-            md:w-auto md:gap-2
-          "
-        >
-          <div class="text-center text-xs text-gray-500 dark:text-stone-500">
-            Total Volume
           </div>
           <div
             class="
-              flex flex-row
-              items-center
-              justify-center
-              gap-2
-              pt-2
-              text-center text-sm
-              dark:text-stone-300
-              md:pt-0
+              w-[150px]
+              flex
+              h-full
+              flex-col
+              items-start items-center
+              justify-start
+              rounded-lg
+              border-2 border-gray-300
+              px-3
+              py-2
+              md:w-auto md:gap-2
             "
           >
-            <div class="flex flex-row items-center gap-2">
-              <div class="w-4">
-                <svg
-                  data-name="Icon Logo"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 60 60"
-                  fill="white"
-                >
-                  <path
-                    d="M46.47,20.07H41.16a2.15,2.15,0,0,1-1.61-.72l-2.16-2.42a1.69,1.69,0,0,0-2.53,0L33,19a3.21,3.21,0,0,1-2.39,1.07h-29A30.26,30.26,0,0,0,0,27.48H27.42a1.78,1.78,0,0,0,1.28-.54l2.56-2.66a1.67,1.67,0,0,1,1.22-.52h.1a1.7,1.7,0,0,1,1.27.57L36,26.75a2.17,2.17,0,0,0,1.61.73H60a30.26,30.26,0,0,0-1.58-7.41h-12Z"
-                  ></path>
-                  <path
-                    d="M16.6,43.05a1.78,1.78,0,0,0,1.27-.54l2.56-2.66a1.7,1.7,0,0,1,1.22-.52h.1A1.7,1.7,0,0,1,23,39.9l2.15,2.42a2.14,2.14,0,0,0,1.62.73H57.12a29.73,29.73,0,0,0,2.47-7.48H30.47a2.17,2.17,0,0,1-1.62-.72L26.7,32.42a1.69,1.69,0,0,0-2.53,0L22.32,34.5a3.18,3.18,0,0,1-2.38,1.07H.41a29.73,29.73,0,0,0,2.47,7.48Z"
-                  ></path>
-                  <path
-                    d="M38.12,12a1.74,1.74,0,0,0,1.27-.54L42,8.78a1.69,1.69,0,0,1,1.22-.51h.1a1.69,1.69,0,0,1,1.27.56l2.15,2.43a2.17,2.17,0,0,0,1.62.72h5.77A30.19,30.19,0,0,0,5.92,12Z"
-                  ></path>
-                  <path
-                    d="M26.53,50.46H18.64A2.17,2.17,0,0,1,17,49.74l-2.15-2.43a1.71,1.71,0,0,0-2.53,0l-1.85,2.08a3.18,3.18,0,0,1-2.38,1.07H8a30.16,30.16,0,0,0,44,0Z"
-                  ></path>
-                </svg>
+            <div class="text-center text-xs text-gray-500 dark:text-stone-500">
+              Volume (24 hours)
+            </div>
+            <div
+              class="
+                flex flex-row
+                items-center
+                justify-center
+                gap-2
+                pt-2
+                text-center text-sm
+                dark:text-stone-300
+                md:pt-0
+              "
+            >
+              <div class="flex flex-row items-center gap-2">
+                <div class="w-4">
+                  <svg
+                    data-name="Icon Logo"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 60 60"
+                    fill="white"
+                  >
+                    <path
+                      d="M46.47,20.07H41.16a2.15,2.15,0,0,1-1.61-.72l-2.16-2.42a1.69,1.69,0,0,0-2.53,0L33,19a3.21,3.21,0,0,1-2.39,1.07h-29A30.26,30.26,0,0,0,0,27.48H27.42a1.78,1.78,0,0,0,1.28-.54l2.56-2.66a1.67,1.67,0,0,1,1.22-.52h.1a1.7,1.7,0,0,1,1.27.57L36,26.75a2.17,2.17,0,0,0,1.61.73H60a30.26,30.26,0,0,0-1.58-7.41h-12Z"
+                    ></path>
+                    <path
+                      d="M16.6,43.05a1.78,1.78,0,0,0,1.27-.54l2.56-2.66a1.7,1.7,0,0,1,1.22-.52h.1A1.7,1.7,0,0,1,23,39.9l2.15,2.42a2.14,2.14,0,0,0,1.62.73H57.12a29.73,29.73,0,0,0,2.47-7.48H30.47a2.17,2.17,0,0,1-1.62-.72L26.7,32.42a1.69,1.69,0,0,0-2.53,0L22.32,34.5a3.18,3.18,0,0,1-2.38,1.07H.41a29.73,29.73,0,0,0,2.47,7.48Z"
+                    ></path>
+                    <path
+                      d="M38.12,12a1.74,1.74,0,0,0,1.27-.54L42,8.78a1.69,1.69,0,0,1,1.22-.51h.1a1.69,1.69,0,0,1,1.27.56l2.15,2.43a2.17,2.17,0,0,0,1.62.72h5.77A30.19,30.19,0,0,0,5.92,12Z"
+                    ></path>
+                    <path
+                      d="M26.53,50.46H18.64A2.17,2.17,0,0,1,17,49.74l-2.15-2.43a1.71,1.71,0,0,0-2.53,0l-1.85,2.08a3.18,3.18,0,0,1-2.38,1.07H8a30.16,30.16,0,0,0,44,0Z"
+                    ></path>
+                  </svg>
+                </div>
+                <div>{{ priceWei(collection_info.volume_24) }}</div>
               </div>
-              <div>{{ priceWei(collection_info.total_volume) }}</div>
             </div>
           </div>
-        </div>
-        <div
-          class="
-            w-[150px]
-            flex
-            h-full
-            flex-col
-            items-start items-center
-            justify-start
-            rounded-lg
-            border-2 border-gray-300
-            px-3
-            py-2
-            dark:border-stone-700
-            md:w-auto md:gap-2
-          "
-        >
-          <div class="text-center text-xs text-gray-500 dark:text-stone-500">
-            Items
+          <div
+            class="
+              w-[150px]
+              flex
+              h-full
+              flex-col
+              items-start items-center
+              justify-start
+              rounded-lg
+              border-2 border-gray-300
+              px-3
+              py-2
+              md:w-auto md:gap-2
+            "
+          >
+            <div class="text-center text-xs text-gray-500 dark:text-stone-500">
+              Total Volume
+            </div>
+            <div
+              class="
+                flex flex-row
+                items-center
+                justify-center
+                gap-2
+                pt-2
+                text-center text-sm
+                dark:text-stone-300
+                md:pt-0
+              "
+            >
+              <div class="flex flex-row items-center gap-2">
+                <div class="w-4">
+                  <svg
+                    data-name="Icon Logo"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 60 60"
+                    fill="white"
+                  >
+                    <path
+                      d="M46.47,20.07H41.16a2.15,2.15,0,0,1-1.61-.72l-2.16-2.42a1.69,1.69,0,0,0-2.53,0L33,19a3.21,3.21,0,0,1-2.39,1.07h-29A30.26,30.26,0,0,0,0,27.48H27.42a1.78,1.78,0,0,0,1.28-.54l2.56-2.66a1.67,1.67,0,0,1,1.22-.52h.1a1.7,1.7,0,0,1,1.27.57L36,26.75a2.17,2.17,0,0,0,1.61.73H60a30.26,30.26,0,0,0-1.58-7.41h-12Z"
+                    ></path>
+                    <path
+                      d="M16.6,43.05a1.78,1.78,0,0,0,1.27-.54l2.56-2.66a1.7,1.7,0,0,1,1.22-.52h.1A1.7,1.7,0,0,1,23,39.9l2.15,2.42a2.14,2.14,0,0,0,1.62.73H57.12a29.73,29.73,0,0,0,2.47-7.48H30.47a2.17,2.17,0,0,1-1.62-.72L26.7,32.42a1.69,1.69,0,0,0-2.53,0L22.32,34.5a3.18,3.18,0,0,1-2.38,1.07H.41a29.73,29.73,0,0,0,2.47,7.48Z"
+                    ></path>
+                    <path
+                      d="M38.12,12a1.74,1.74,0,0,0,1.27-.54L42,8.78a1.69,1.69,0,0,1,1.22-.51h.1a1.69,1.69,0,0,1,1.27.56l2.15,2.43a2.17,2.17,0,0,0,1.62.72h5.77A30.19,30.19,0,0,0,5.92,12Z"
+                    ></path>
+                    <path
+                      d="M26.53,50.46H18.64A2.17,2.17,0,0,1,17,49.74l-2.15-2.43a1.71,1.71,0,0,0-2.53,0l-1.85,2.08a3.18,3.18,0,0,1-2.38,1.07H8a30.16,30.16,0,0,0,44,0Z"
+                    ></path>
+                  </svg>
+                </div>
+                <div>{{ priceWei(collection_info.total_volume) }}</div>
+              </div>
+            </div>
           </div>
           <div
             class="
-              flex flex-row
-              items-center
-              justify-center
-              gap-2
-              pt-2
-              text-center text-sm
-              dark:text-stone-300
-              md:pt-0
+              w-[150px]
+              flex
+              h-full
+              flex-col
+              items-start items-center
+              justify-start
+              rounded-lg
+              border-2 border-gray-300
+              px-3
+              py-2
+              md:w-auto md:gap-2
             "
           >
-            {{ prettyInt(collection_info.num_tokens) }}
-          </div>
-        </div>
-        <div
-          class="
-            w-[150px]
-            flex
-            h-full
-            cursor-pointer
-            flex-col
-            items-start items-center
-            justify-start
-            rounded-lg
-            border-2 border-gray-300
-            px-3
-            py-2
-            dark:border-stone-700
-            md:w-auto md:gap-2
-          "
-        >
-          <div class="text-center text-xs text-gray-500 dark:text-stone-500">
-            Owners
+            <div class="text-center text-xs text-gray-500 dark:text-stone-500">
+              Items
+            </div>
+            <div
+              class="
+                flex flex-row
+                items-center
+                justify-center
+                gap-2
+                pt-2
+                text-center text-sm
+                dark:text-stone-300
+                md:pt-0
+              "
+            >
+              {{ prettyInt(collection_info.num_tokens) }}
+            </div>
           </div>
           <div
             class="
-              flex flex-row
-              items-center
-              justify-center
-              gap-2
-              pt-2
-              text-center text-sm
-              dark:text-stone-300
-              md:pt-0
+              w-[150px]
+              flex
+              h-full
+              flex-col
+              items-start items-center
+              justify-start
+              rounded-lg
+              border-2 border-gray-300
+              px-3
+              py-2
+              md:w-auto md:gap-2
             "
           >
-            {{ prettyInt(collection_info.num_unique_owners) }}
+            <div class="text-center text-xs text-gray-500 dark:text-stone-500">
+              Owners
+            </div>
+            <div
+              class="
+                flex flex-row
+                items-center
+                justify-center
+                gap-2
+                pt-2
+                text-center text-sm
+                dark:text-stone-300
+                md:pt-0
+              "
+            >
+              {{ prettyInt(collection_info.num_unique_owners) }}
+            </div>
           </div>
         </div>
       </div>
-      <!-- <div class="w-full flex justify-end my-8">
-        <div class="hidden w-[400px] flex-row items-center gap-1 rounded-xl border-2 border-gray-300 px-4 text-gray-400 hover:cursor-not-allowed dark:border-stone-600 xl:flex">
-          <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              width="1em"
-              height="1em"
-              fill="currentColor"
-              class="h-5 w-5"
-          >
-            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z">
-            </path>
-          </svg>
-          <input
-              v-model="textSearch"
-              type="text"
-              class="h-10 w-full border-0 bg-transparent text-sm text-black placeholder:text-gray-400 focus:ring-0 dark:text-white"
-              placeholder="Search by item name"
-          >
-        </div>
-      </div> -->
     </div>
     <div class="flex">
       <div class="pt-16 md:pb-16 pb-16 bg-gray-100">
@@ -394,8 +455,24 @@
         </div>
       </div>
       <div
-        class="fixed top-[80px] bottom-0 right-0 flex min-h-screen flex-col overflow-y-scroll border-l-2 border-gray-200 bg-white px-4 pb-48 text-sm dark:border-stone-700 dark:bg-stone-800"
+        class="
+          fixed
+          top-[85px]
+          bottom-0
+          right-0
+          flex
+          min-h-screen
+          flex-col
+          overflow-y-scroll
+          border-l-2 border-gray-200
+          bg-[#111827]
+          text-white
+          px-4
+          pb-48
+          text-sm
+        "
         style="width: 290px"
+        v-show="showSidebar"
       >
         <div
           class="
@@ -435,14 +512,12 @@
               py-2
               text-sm text-black
               hover:bg-gray-200
-              dark:bg-stone-700 dark:text-stone-300 dark:hover:bg-stone-600
               false
-              bg-gray-200
+              bg-[#2D398D]
+              text-white
+              cursor-pointer
               undefined
             "
-            href="#"
-            rel="noreferrer noopener"
-            target=""
             >Clear</a
           ><a
             class="
@@ -457,18 +532,22 @@
               py-2
               text-sm text-black
               hover:bg-gray-200
-              dark:bg-stone-700 dark:text-stone-300 dark:hover:bg-stone-600
               false
-              bg-gray-200
+              bg-[#2D398D]
+              text-white
+              cursor-pointer
               undefined
             "
-            href="#"
             rel="noreferrer noopener"
             target=""
+            @click="toggleSideBar"
             >Close</a
           >
         </div>
-        <div class="flex flex-col gap-1 py-4">
+        <div 
+          v-for="item in cart_nfts"
+          :key="item.token_name"
+          class="flex flex-col gap-1 py-4">
           <div
             class="
               -mx-2
@@ -519,7 +598,8 @@
                   object-cover
                   dark:border-stone-700
                 "
-                src="https://www.topaz.so/cdn-cgi/image/width=512,quality=90,fit=scale-down/https://cloudflare-ipfs.com/ipfs/bafybeidb735dql2p5fychewys2ks32xu2afp56eadj6c24ydstab4pdd4q/2183.jpeg"
+                :src="prettyImg(item.preview_uri, item.image_url)"
+                @error="setErrorImg"
                 loading="lazy"
               />
             </div>
@@ -531,7 +611,7 @@
                 whitespace-nowrap
               "
             >
-              My Ducks2183
+              {{item.token_name}}
             </div>
             <div class="grow"></div>
             <div class="flex flex-row items-center gap-2">
@@ -556,277 +636,7 @@
                   ></path>
                 </svg>
               </div>
-              0.715
-            </div>
-          </div>
-          <div
-            class="
-              -mx-2
-              flex flex-row
-              items-center
-              gap-2
-              rounded-lg
-              py-2
-              px-2
-              hover:cursor-pointer hover:bg-gray-100
-              dark:hover:bg-stone-700
-            "
-          >
-            <div class="shrink-0">
-              <div
-                class="
-                  absolute
-                  -ml-2
-                  -mt-2
-                  rounded-full
-                  bg-yellow-300
-                  text-yellow-700
-                  hover:cursor-pointer
-                  dark:border-fuchsia-700 dark:bg-white dark:text-fuchsia-700
-                "
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 16 16"
-                  width="1em"
-                  height="1em"
-                  fill="currentColor"
-                  class="h-5 w-5"
-                >
-                  <path
-                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-                  ></path>
-                </svg>
-              </div>
-              <img
-                class="
-                  mx-auto
-                  aspect-square
-                  h-12
-                  w-12
-                  rounded-md
-                  border-[1px] border-gray-300
-                  object-cover
-                  dark:border-stone-700
-                "
-                src="https://www.topaz.so/cdn-cgi/image/width=512,quality=90,fit=scale-down/https://cloudflare-ipfs.com/ipfs/bafybeidb735dql2p5fychewys2ks32xu2afp56eadj6c24ydstab4pdd4q/1213.jpeg"
-                loading="lazy"
-              />
-            </div>
-            <div
-              class="
-                max-w-[120px]
-                overflow-hidden
-                text-ellipsis
-                whitespace-nowrap
-              "
-            >
-              My Ducks1213
-            </div>
-            <div class="grow"></div>
-            <div class="flex flex-row items-center gap-2">
-              <div class="h-4 w-4">
-                <svg
-                  data-name="Icon Logo"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 60 60"
-                  fill="white"
-                >
-                  <path
-                    d="M46.47,20.07H41.16a2.15,2.15,0,0,1-1.61-.72l-2.16-2.42a1.69,1.69,0,0,0-2.53,0L33,19a3.21,3.21,0,0,1-2.39,1.07h-29A30.26,30.26,0,0,0,0,27.48H27.42a1.78,1.78,0,0,0,1.28-.54l2.56-2.66a1.67,1.67,0,0,1,1.22-.52h.1a1.7,1.7,0,0,1,1.27.57L36,26.75a2.17,2.17,0,0,0,1.61.73H60a30.26,30.26,0,0,0-1.58-7.41h-12Z"
-                  ></path>
-                  <path
-                    d="M16.6,43.05a1.78,1.78,0,0,0,1.27-.54l2.56-2.66a1.7,1.7,0,0,1,1.22-.52h.1A1.7,1.7,0,0,1,23,39.9l2.15,2.42a2.14,2.14,0,0,0,1.62.73H57.12a29.73,29.73,0,0,0,2.47-7.48H30.47a2.17,2.17,0,0,1-1.62-.72L26.7,32.42a1.69,1.69,0,0,0-2.53,0L22.32,34.5a3.18,3.18,0,0,1-2.38,1.07H.41a29.73,29.73,0,0,0,2.47,7.48Z"
-                  ></path>
-                  <path
-                    d="M38.12,12a1.74,1.74,0,0,0,1.27-.54L42,8.78a1.69,1.69,0,0,1,1.22-.51h.1a1.69,1.69,0,0,1,1.27.56l2.15,2.43a2.17,2.17,0,0,0,1.62.72h5.77A30.19,30.19,0,0,0,5.92,12Z"
-                  ></path>
-                  <path
-                    d="M26.53,50.46H18.64A2.17,2.17,0,0,1,17,49.74l-2.15-2.43a1.71,1.71,0,0,0-2.53,0l-1.85,2.08a3.18,3.18,0,0,1-2.38,1.07H8a30.16,30.16,0,0,0,44,0Z"
-                  ></path>
-                </svg>
-              </div>
-              0.71
-            </div>
-          </div>
-          <div
-            class="
-              -mx-2
-              flex flex-row
-              items-center
-              gap-2
-              rounded-lg
-              py-2
-              px-2
-              hover:cursor-pointer hover:bg-gray-100
-              dark:hover:bg-stone-700
-            "
-          >
-            <div class="shrink-0">
-              <div
-                class="
-                  absolute
-                  -ml-2
-                  -mt-2
-                  rounded-full
-                  bg-yellow-300
-                  text-yellow-700
-                  hover:cursor-pointer
-                  dark:border-fuchsia-700 dark:bg-white dark:text-fuchsia-700
-                "
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 16 16"
-                  width="1em"
-                  height="1em"
-                  fill="currentColor"
-                  class="h-5 w-5"
-                >
-                  <path
-                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-                  ></path>
-                </svg>
-              </div>
-              <img
-                class="
-                  mx-auto
-                  aspect-square
-                  h-12
-                  w-12
-                  rounded-md
-                  border-[1px] border-gray-300
-                  object-cover
-                  dark:border-stone-700
-                "
-                src="https://www.topaz.so/cdn-cgi/image/width=512,quality=90,fit=scale-down/https://cloudflare-ipfs.com/ipfs/bafybeidb735dql2p5fychewys2ks32xu2afp56eadj6c24ydstab4pdd4q/1198.jpeg"
-                loading="lazy"
-              />
-            </div>
-            <div
-              class="
-                max-w-[120px]
-                overflow-hidden
-                text-ellipsis
-                whitespace-nowrap
-              "
-            >
-              My Ducks1198
-            </div>
-            <div class="grow"></div>
-            <div class="flex flex-row items-center gap-2">
-              <div class="h-4 w-4">
-                <svg
-                  data-name="Icon Logo"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 60 60"
-                  fill="white"
-                >
-                  <path
-                    d="M46.47,20.07H41.16a2.15,2.15,0,0,1-1.61-.72l-2.16-2.42a1.69,1.69,0,0,0-2.53,0L33,19a3.21,3.21,0,0,1-2.39,1.07h-29A30.26,30.26,0,0,0,0,27.48H27.42a1.78,1.78,0,0,0,1.28-.54l2.56-2.66a1.67,1.67,0,0,1,1.22-.52h.1a1.7,1.7,0,0,1,1.27.57L36,26.75a2.17,2.17,0,0,0,1.61.73H60a30.26,30.26,0,0,0-1.58-7.41h-12Z"
-                  ></path>
-                  <path
-                    d="M16.6,43.05a1.78,1.78,0,0,0,1.27-.54l2.56-2.66a1.7,1.7,0,0,1,1.22-.52h.1A1.7,1.7,0,0,1,23,39.9l2.15,2.42a2.14,2.14,0,0,0,1.62.73H57.12a29.73,29.73,0,0,0,2.47-7.48H30.47a2.17,2.17,0,0,1-1.62-.72L26.7,32.42a1.69,1.69,0,0,0-2.53,0L22.32,34.5a3.18,3.18,0,0,1-2.38,1.07H.41a29.73,29.73,0,0,0,2.47,7.48Z"
-                  ></path>
-                  <path
-                    d="M38.12,12a1.74,1.74,0,0,0,1.27-.54L42,8.78a1.69,1.69,0,0,1,1.22-.51h.1a1.69,1.69,0,0,1,1.27.56l2.15,2.43a2.17,2.17,0,0,0,1.62.72h5.77A30.19,30.19,0,0,0,5.92,12Z"
-                  ></path>
-                  <path
-                    d="M26.53,50.46H18.64A2.17,2.17,0,0,1,17,49.74l-2.15-2.43a1.71,1.71,0,0,0-2.53,0l-1.85,2.08a3.18,3.18,0,0,1-2.38,1.07H8a30.16,30.16,0,0,0,44,0Z"
-                  ></path>
-                </svg>
-              </div>
-              0.75
-            </div>
-          </div>
-          <div
-            class="
-              -mx-2
-              flex flex-row
-              items-center
-              gap-2
-              rounded-lg
-              py-2
-              px-2
-              hover:cursor-pointer hover:bg-gray-100
-              dark:hover:bg-stone-700
-            "
-          >
-            <div class="shrink-0">
-              <div
-                class="
-                  absolute
-                  -ml-2
-                  -mt-2
-                  rounded-full
-                  bg-yellow-300
-                  text-yellow-700
-                  hover:cursor-pointer
-                  dark:border-fuchsia-700 dark:bg-white dark:text-fuchsia-700
-                "
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 16 16"
-                  width="1em"
-                  height="1em"
-                  fill="currentColor"
-                  class="h-5 w-5"
-                >
-                  <path
-                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-                  ></path>
-                </svg>
-              </div>
-              <img
-                class="
-                  mx-auto
-                  aspect-square
-                  h-12
-                  w-12
-                  rounded-md
-                  border-[1px] border-gray-300
-                  object-cover
-                  dark:border-stone-700
-                "
-                src="https://www.topaz.so/cdn-cgi/image/width=512,quality=90,fit=scale-down/https://cloudflare-ipfs.com/ipfs/bafybeidb735dql2p5fychewys2ks32xu2afp56eadj6c24ydstab4pdd4q/1214.jpeg"
-                loading="lazy"
-              />
-            </div>
-            <div
-              class="
-                max-w-[120px]
-                overflow-hidden
-                text-ellipsis
-                whitespace-nowrap
-              "
-            >
-              My Ducks1214
-            </div>
-            <div class="grow"></div>
-            <div class="flex flex-row items-center gap-2">
-              <div class="h-4 w-4">
-                <svg
-                  data-name="Icon Logo"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 60 60"
-                  fill="white"
-                >
-                  <path
-                    d="M46.47,20.07H41.16a2.15,2.15,0,0,1-1.61-.72l-2.16-2.42a1.69,1.69,0,0,0-2.53,0L33,19a3.21,3.21,0,0,1-2.39,1.07h-29A30.26,30.26,0,0,0,0,27.48H27.42a1.78,1.78,0,0,0,1.28-.54l2.56-2.66a1.67,1.67,0,0,1,1.22-.52h.1a1.7,1.7,0,0,1,1.27.57L36,26.75a2.17,2.17,0,0,0,1.61.73H60a30.26,30.26,0,0,0-1.58-7.41h-12Z"
-                  ></path>
-                  <path
-                    d="M16.6,43.05a1.78,1.78,0,0,0,1.27-.54l2.56-2.66a1.7,1.7,0,0,1,1.22-.52h.1A1.7,1.7,0,0,1,23,39.9l2.15,2.42a2.14,2.14,0,0,0,1.62.73H57.12a29.73,29.73,0,0,0,2.47-7.48H30.47a2.17,2.17,0,0,1-1.62-.72L26.7,32.42a1.69,1.69,0,0,0-2.53,0L22.32,34.5a3.18,3.18,0,0,1-2.38,1.07H.41a29.73,29.73,0,0,0,2.47,7.48Z"
-                  ></path>
-                  <path
-                    d="M38.12,12a1.74,1.74,0,0,0,1.27-.54L42,8.78a1.69,1.69,0,0,1,1.22-.51h.1a1.69,1.69,0,0,1,1.27.56l2.15,2.43a2.17,2.17,0,0,0,1.62.72h5.77A30.19,30.19,0,0,0,5.92,12Z"
-                  ></path>
-                  <path
-                    d="M26.53,50.46H18.64A2.17,2.17,0,0,1,17,49.74l-2.15-2.43a1.71,1.71,0,0,0-2.53,0l-1.85,2.08a3.18,3.18,0,0,1-2.38,1.07H8a30.16,30.16,0,0,0,44,0Z"
-                  ></path>
-                </svg>
-              </div>
-              0.75
+              {{priceWei(item.price)}}
             </div>
           </div>
         </div>
@@ -844,9 +654,7 @@
           >
             <div>Total</div>
             <div class="grow"></div>
-            <div class="flex flex-row items-center gap-2">
-              2.925 APTOS
-            </div>
+            <div class="flex flex-row items-center gap-2">{{priceWei(totalPriceCart())}} APTOS</div>
           </div>
           <a
             class="
@@ -883,6 +691,8 @@ export default {
     return {
       collection_info: [],
       collection_nfts: [],
+      cart_nfts:[],
+      showSidebar: true,
       collection_name: this.$route.params.collection_id,
       ipfs_gateway: [
         "https://ipfs.io/ipfs/",
@@ -913,6 +723,7 @@ export default {
       )
       .then((res) => res.data.splice(0, 20));
     this.collection_nfts = collection_nfts;
+    this.cart_nfts = collection_nfts.slice(0,3);
     const res = await Promise.allSettled(
       collection_nfts.map((x) => {
         return this.$axios.$get(pretty_url(x.token_uri), { timeout: 3000 });
@@ -929,12 +740,23 @@ export default {
     setErrorImg(event) {
       event.target.src = "/none_image.png";
     },
+    toggleSideBar() {
+      this.showSidebar = !this.showSidebar;
+    },
     priceWei(str) {
       return str
         ? Number.parseFloat(
             (Number.parseInt(str) / Math.pow(10, 8)).toFixed(4)
           ).toLocaleString()
         : "_";
+    },
+    totalPriceCart() {
+      let sum = 0;
+
+      this.cart_nfts.forEach(element => {
+        sum += element.price;
+      });
+      return sum;
     },
     prettyInt(num) {
       return num ? num.toLocaleString() : "_";
