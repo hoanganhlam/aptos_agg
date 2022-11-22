@@ -1,6 +1,6 @@
 import {Context, Inject} from '@nuxt/types/app'
 import {AccountKeys, NetworkInfo, WalletAdapter} from "~/helpers/aptos/WalletAdapters/BaseAdapter";
-import {MartianWalletAdapter, PontemWalletAdapter} from "~/helpers/aptos/WalletAdapters";
+import {MartianWalletAdapter, PontemWalletAdapter, PetraWalletAdapter} from "~/helpers/aptos/WalletAdapters";
 
 export * from './WalletAdapters';
 
@@ -19,7 +19,8 @@ interface APTWallet {
 
 const ADAPTER_MAPPING = {
   "Martian": MartianWalletAdapter,
-  "Potem": PontemWalletAdapter
+  "Potem": PontemWalletAdapter,
+  "Petra": PetraWalletAdapter
 }
 
 export default async function (context: Context, inject: Inject) {
