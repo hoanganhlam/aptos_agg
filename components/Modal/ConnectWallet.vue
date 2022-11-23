@@ -12,6 +12,12 @@
       <img class="w-5 h-5" src="/wallets/Potem.png" alt="">
       <span>Potem</span>
     </div>
+    <div
+      class="border flex px-4 py-2 rounded cursor-pointer hover:shadow items-center gap-3"
+      @click="$aptos.connect('Petra')">
+      <img class="w-5 h-5" src="https://raw.githubusercontent.com/hippospace/aptos-wallet-adapter/main/logos/petra.png" alt="">
+      <span>Petra</span>
+    </div>
   </div>
 </template>
 
