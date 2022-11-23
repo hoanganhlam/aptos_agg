@@ -35,12 +35,12 @@ interface PontemAccount {
   authKey?: MaybeHexString;
   isConnected: boolean;
 }
-interface IPontemWallet {
+interface IPetraWallet {
   connect: () => Promise<ConnectPontemAccount>;
   account(): Promise<MaybeHexString>;
   publicKey(): Promise<MaybeHexString>;
   generateTransaction(sender: MaybeHexString, payload: any): Promise<any>;
-  signAndSubmit(
+  signAndSubmitTransaction(
     transaction: Types.TransactionPayload,
     options?: any
   ): Promise<{
@@ -62,7 +62,7 @@ interface IPontemWallet {
 }
 
 interface PetraWindow extends Window {
-  aptos?: IPontemWallet;
+  aptos?: IPetraWallet;
 }
 
 declare const window: PetraWindow;
@@ -70,7 +70,7 @@ declare const window: PetraWindow;
 export const PetraWalletName = 'Petra' as WalletName<'Petra'>;
 
 export interface PetraWalletAdapterConfig {
-  provider?: IPontemWallet;
+  provider?: IPetraWallet;
   // network?: WalletAdapterNetwork;
   timeout?: number;
 }
@@ -83,7 +83,7 @@ export class PetraWalletAdapter extends BaseWalletAdapter {
   icon =
     'https://raw.githubusercontent.com/hippospace/aptos-wallet-adapter/main/logos/petra.png';
 
-  protected _provider: IPontemWallet | undefined;
+  protected _provider: IPetraWallet | undefined;
 
   protected _network: any;
 
@@ -246,7 +246,7 @@ export class PetraWalletAdapter extends BaseWalletAdapter {
       const wallet = this._wallet;
       const provider = this._provider || window.aptos;
       if (!wallet || !provider) throw new WalletNotConnectedError();
-      const response = await provider?.signAndSubmit(transactionPyld, options);
+      const response = await provider?.signAndSubmitTransaction(transactionPyld, options);
 
       if (!response || !response.success) {
         throw new Error('No response');
