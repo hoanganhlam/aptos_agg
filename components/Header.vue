@@ -1,18 +1,11 @@
 <template>
   <header class="sticky bg-white top-0 z-50">
-    <div class="px-4 md:px-12 py-6 mx-auto flex gap-4 items-center justify-between font-bold">
+    <div class="max-w-6xl mx-auto py-6 mx-auto flex gap-4 items-center justify-between font-bold">
       <div class="flex-1 flex items-center gap-6">
         <nuxt-link class="w-32" to="/">
           <img src="/logo.png" alt="Ongoing Airdrop">
         </nuxt-link>
-        <div class="flex-1 flex items-center gap-3">
-          <div class="hidden md:flex gap-8 font-bold">
-            <nuxt-link to="/discovery">Discovery</nuxt-link>
-            <nuxt-link to="/">Swap</nuxt-link>
-            <nuxt-link to="/">NFT Staking</nuxt-link>
-            <nuxt-link to="/">NFT Collaterol</nuxt-link>
-          </div>
-        </div>
+        <div class="flex-1 flex items-center gap-3"></div>
       </div>
       <div class="flex-1 flex justify-end">
         <client-only>
