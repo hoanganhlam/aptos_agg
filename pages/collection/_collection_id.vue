@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-row mx-auto bg-[#F1F1F1]">
-    <div class="grow mx-auto md:text-left">
-      <div class="bg-white my-16 rounded-xl p-4 max-w-6xl mx-auto text-center items-center md:items-start text-[#111827]">
+    <div class="grow mx-auto md:text-left space-y-8 py-16">
+      <div class="bg-white rounded-xl p-4 max-w-6xl mx-auto text-center items-center md:items-start text-[#111827]">
         <div class="mb-6 flex w-full flex-col items-center gap-4 md:flex-row md:items-start">
           <img
               class="h-56 w-56 flex-shrink-0 rounded-xl border-4 border-white object-cover drop-shadow-md dark:border-stone-500"
@@ -166,7 +166,26 @@
           </div>
         </div>
       </div>
-      <div class="pb-16">
+      <div class="max-w-6xl mx-auto flex justify-between">
+        <div class="flex gap-4">
+          <div class="rounded-full cursor-pointer py-2 px-6 bg-[#E17A2D] text-white font-semibold w-32 text-bold">
+            Trending
+          </div>
+        </div>
+        <div class="flex gap-4 text-[#111827]">
+          <div name="externalTrigger" class="rounded-full bg-[#DCDCDC] cursor-pointer py-2 px-4 font-semibold text-bold flex justify-center items-center gap-2">
+            <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 7C3.44922 7 3 7.44922 3 8C3 8.55078 3.44922 9 4 9H6.21875L8.84375 19.5C9.06641 20.3906 9.86328 21 10.7812 21H23.25C24.1523 21 24.918 20.4023 25.1562 19.5312L27.75 10H25.6562L23.25 19H10.7812L8.15625 8.5C7.93359 7.60938 7.13672 7 6.21875 7H4ZM22 21C20.3555 21 19 22.3555 19 24C19 25.6445 20.3555 27 22 27C23.6445 27 25 25.6445 25 24C25 22.3555 23.6445 21 22 21ZM13 21C11.3555 21 10 22.3555 10 24C10 25.6445 11.3555 27 13 27C14.6445 27 16 25.6445 16 24C16 22.3555 14.6445 21 13 21ZM16 7V12H13L17 16L21 12H18V7H16ZM13 23C13.5625 23 14 23.4375 14 24C14 24.5625 13.5625 25 13 25C12.4375 25 12 24.5625 12 24C12 23.4375 12.4375 23 13 23ZM22 23C22.5625 23 23 23.4375 23 24C23 24.5625 22.5625 25 22 25C21.4375 25 21 24.5625 21 24C21 23.4375 21.4375 23 22 23Z" fill="#111827"/>
+            </svg>
+            <span>Cart</span>
+          </div>
+          <div class="rounded-full bg-[#DCDCDC] cursor-pointer py-2 px-4 font-semibold text-bold flex justify-center items-center gap-2">
+            <icon name="refresh"></icon>
+            <span>Refresh</span>
+          </div>
+        </div>
+      </div>
+      <div>
         <div class="max-w-6xl mx-auto space-y-10">
           <div class="grid md:grid-cols-4 gap-4">
             <div v-for="item in collection_nfts" :key="item.token_name" class="p-3 cursor-pointer bg-white rounded-xl"
@@ -214,137 +233,70 @@
         </div>
       </div>
     </div>
-    <div class="
-        flex-none
-        top-[85px]
-        bottom-0
-        right-0
-        border-gray-200
-        bg-[#111827]
-        text-white
-        px-4
-        pb-48
-        text-sm
-      " style="width: 290px" v-show="showSidebar">
-      <div class="
-          flex flex-row
-          items-center
-          gap-2
-          border-b-2 border-gray-200
-          py-2
-          dark:border-stone-700
-        ">
-        <div class="flex flex-row items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor"
-               class="h-6 w-6">
-            <path
-                d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z">
-            </path>
-          </svg>
-          My Cart
-        </div>
-        <div class="grow"></div>
-        <a v-if="cart_nfts.length > 0" class="
-            flex flex-row
-            items-center
-            justify-center
-            gap-3
-            whitespace-nowrap
-            rounded-xl
-            bg-opacity-60
-            px-4
-            py-2
-            text-sm
-            hover:bg-gray-800
-            false
-            text-white
-            cursor-pointer
-            undefined
-          " @click="clearCart()">Clear</a><a class="
-            flex flex-row
-            items-center
-            justify-center
-            gap-3
-            whitespace-nowrap
-            rounded-xl
-            bg-opacity-60
-            px-4
-            py-2
-            text-sm
-            hover:bg-gray-800
-            false
-            text-white
-            cursor-pointer
-            undefined
-          " rel="noreferrer noopener" target="" @click="toggleSideBar">Close</a>
-      </div>
-      <div v-for="item in cart_nfts" :key="item.token_name" class="flex flex-col gap-1 py-2">
-        <div class="
-            -mx-2
-            flex flex-row
-            items-center
-            rounded-lg
-            py-2
-            px-2
-            hover:cursor-pointer hover:bg-gray-100
-            dark:hover:bg-stone-700
-          " @click="toggleCart(item)">
-          <img class="
-                mx-auto
-                aspect-square
-                h-12
-                w-12
-                rounded-md
-                mr-2
-                border-[1px] border-gray-300
-                object-cover
-                dark:border-stone-700
-              " :src="prettyImg(item.preview_uri, item.image_url)" @error="setErrorImg" loading="lazy"/>
-          <div class="
-              max-w-[120px]
-              overflow-hidden
-              text-ellipsis
-              whitespace-nowrap
-            ">
-            {{ item.token_name }}
-          </div>
-          <div class="grow"></div>
+    <tippy
+        interactive
+        trigger="click"
+        to="externalTrigger"
+        placement="bottom-end"
+        theme="light"
+    >
+      <div class="bg-white text-black flex-none bottom-0 right-0 border-gray-200 p-6 text-sm rounded-xl shadow" style="width: 300px">
+        <div class="flex flex-row items-center gap-2 border-b border-[#DCDCDC] py-2">
           <div class="flex flex-row items-center gap-2">
-            <div class="h-4 w-4">
-              <svg data-name="Icon Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" fill="white">
-                <path
-                    d="M46.47,20.07H41.16a2.15,2.15,0,0,1-1.61-.72l-2.16-2.42a1.69,1.69,0,0,0-2.53,0L33,19a3.21,3.21,0,0,1-2.39,1.07h-29A30.26,30.26,0,0,0,0,27.48H27.42a1.78,1.78,0,0,0,1.28-.54l2.56-2.66a1.67,1.67,0,0,1,1.22-.52h.1a1.7,1.7,0,0,1,1.27.57L36,26.75a2.17,2.17,0,0,0,1.61.73H60a30.26,30.26,0,0,0-1.58-7.41h-12Z">
-                </path>
-                <path
-                    d="M16.6,43.05a1.78,1.78,0,0,0,1.27-.54l2.56-2.66a1.7,1.7,0,0,1,1.22-.52h.1A1.7,1.7,0,0,1,23,39.9l2.15,2.42a2.14,2.14,0,0,0,1.62.73H57.12a29.73,29.73,0,0,0,2.47-7.48H30.47a2.17,2.17,0,0,1-1.62-.72L26.7,32.42a1.69,1.69,0,0,0-2.53,0L22.32,34.5a3.18,3.18,0,0,1-2.38,1.07H.41a29.73,29.73,0,0,0,2.47,7.48Z">
-                </path>
-                <path
-                    d="M38.12,12a1.74,1.74,0,0,0,1.27-.54L42,8.78a1.69,1.69,0,0,1,1.22-.51h.1a1.69,1.69,0,0,1,1.27.56l2.15,2.43a2.17,2.17,0,0,0,1.62.72h5.77A30.19,30.19,0,0,0,5.92,12Z">
-                </path>
-                <path
-                    d="M26.53,50.46H18.64A2.17,2.17,0,0,1,17,49.74l-2.15-2.43a1.71,1.71,0,0,0-2.53,0l-1.85,2.08a3.18,3.18,0,0,1-2.38,1.07H8a30.16,30.16,0,0,0,44,0Z">
-                </path>
-              </svg>
-            </div>
-            {{ priceWei(item.price) }}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor"
+                 class="h-6 w-6">
+              <path
+                  d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z">
+              </path>
+            </svg>
+            <span>My Cart</span>
           </div>
         </div>
-      </div>
-      <div>
-        <div class="
+        <div v-for="item in cart_nfts" :key="item.token_name" class="flex flex-col gap-1 py-2">
+          <div class="-mx-2 flex flex-row items-center rounded-lg py-2 px-2 hover:cursor-pointer hover:bg-gray-100" @click="toggleCart(item)">
+            <img
+                class="mx-auto aspect-square h-12 w-12 rounded-md mr-2 border border-[#DCDCDC] object-cover dark:border-stone-700"
+                :src="prettyImg(item.preview_uri, item.image_url)" @error="setErrorImg" loading="lazy"
+            />
+            <div class="max-w-[120px] overflow-hidden text-ellipsis whitespace-nowrap">
+              {{ item.token_name }}
+            </div>
+            <div class="grow"></div>
+            <div class="flex flex-row items-center gap-2">
+              <div class="h-4 w-4">
+                <svg data-name="Icon Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" fill="white">
+                  <path
+                      d="M46.47,20.07H41.16a2.15,2.15,0,0,1-1.61-.72l-2.16-2.42a1.69,1.69,0,0,0-2.53,0L33,19a3.21,3.21,0,0,1-2.39,1.07h-29A30.26,30.26,0,0,0,0,27.48H27.42a1.78,1.78,0,0,0,1.28-.54l2.56-2.66a1.67,1.67,0,0,1,1.22-.52h.1a1.7,1.7,0,0,1,1.27.57L36,26.75a2.17,2.17,0,0,0,1.61.73H60a30.26,30.26,0,0,0-1.58-7.41h-12Z">
+                  </path>
+                  <path
+                      d="M16.6,43.05a1.78,1.78,0,0,0,1.27-.54l2.56-2.66a1.7,1.7,0,0,1,1.22-.52h.1A1.7,1.7,0,0,1,23,39.9l2.15,2.42a2.14,2.14,0,0,0,1.62.73H57.12a29.73,29.73,0,0,0,2.47-7.48H30.47a2.17,2.17,0,0,1-1.62-.72L26.7,32.42a1.69,1.69,0,0,0-2.53,0L22.32,34.5a3.18,3.18,0,0,1-2.38,1.07H.41a29.73,29.73,0,0,0,2.47,7.48Z">
+                  </path>
+                  <path
+                      d="M38.12,12a1.74,1.74,0,0,0,1.27-.54L42,8.78a1.69,1.69,0,0,1,1.22-.51h.1a1.69,1.69,0,0,1,1.27.56l2.15,2.43a2.17,2.17,0,0,0,1.62.72h5.77A30.19,30.19,0,0,0,5.92,12Z">
+                  </path>
+                  <path
+                      d="M26.53,50.46H18.64A2.17,2.17,0,0,1,17,49.74l-2.15-2.43a1.71,1.71,0,0,0-2.53,0l-1.85,2.08a3.18,3.18,0,0,1-2.38,1.07H8a30.16,30.16,0,0,0,44,0Z">
+                  </path>
+                </svg>
+              </div>
+              {{ priceWei(item.price) }}
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="
             mb-4
             flex flex-row
             items-center
             gap-2
-            border-t-2 border-b-2 border-gray-200
+            border-y border-[#DCDCDC]
             py-4
-            dark:border-stone-700
           ">
-          <div>Total</div>
-          <div class="grow"></div>
-          <div class="flex flex-row items-center gap-2">{{ priceWei(totalPriceCart()) }} APTOS</div>
-        </div>
-        <button class="
+            <div>Total</div>
+            <div class="grow"></div>
+            <div class="flex flex-row items-center gap-2">{{ priceWei(totalPriceCart()) }} APTOS</div>
+          </div>
+          <button class="
             w-full
             text-center
             gap-3
@@ -356,9 +308,10 @@
             text-white bg-gray-800
             hover:bg-gray-400
           " @click="buyAll()">Buy Now
-        </button>
+          </button>
+        </div>
       </div>
-    </div>
+    </tippy>
   </div>
 </template>
 
