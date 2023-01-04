@@ -178,6 +178,7 @@
               <path d="M4 7C3.44922 7 3 7.44922 3 8C3 8.55078 3.44922 9 4 9H6.21875L8.84375 19.5C9.06641 20.3906 9.86328 21 10.7812 21H23.25C24.1523 21 24.918 20.4023 25.1562 19.5312L27.75 10H25.6562L23.25 19H10.7812L8.15625 8.5C7.93359 7.60938 7.13672 7 6.21875 7H4ZM22 21C20.3555 21 19 22.3555 19 24C19 25.6445 20.3555 27 22 27C23.6445 27 25 25.6445 25 24C25 22.3555 23.6445 21 22 21ZM13 21C11.3555 21 10 22.3555 10 24C10 25.6445 11.3555 27 13 27C14.6445 27 16 25.6445 16 24C16 22.3555 14.6445 21 13 21ZM16 7V12H13L17 16L21 12H18V7H16ZM13 23C13.5625 23 14 23.4375 14 24C14 24.5625 13.5625 25 13 25C12.4375 25 12 24.5625 12 24C12 23.4375 12.4375 23 13 23ZM22 23C22.5625 23 23 23.4375 23 24C23 24.5625 22.5625 25 22 25C21.4375 25 21 24.5625 21 24C21 23.4375 21.4375 23 22 23Z" fill="#111827"/>
             </svg>
             <span>Cart</span>
+            <div class="w-5 h-5 text-white rounded-full bg-[#F85D50] flex items-center justify-center" v-if="cart_nfts.length > 0">{{ totalItemsInCart() }} </div>
           </div>
           <div class="rounded-full bg-[#DCDCDC] cursor-pointer py-2 px-4 font-semibold text-bold flex justify-center items-center gap-2">
             <icon name="refresh"></icon>
@@ -189,8 +190,13 @@
         <div class="max-w-6xl mx-auto space-y-10">
           <div class="grid md:grid-cols-4 gap-4">
             <div v-for="item in collection_nfts" :key="item.token_name" class="p-3 cursor-pointer bg-white rounded-xl"
-                 :class="{ '': isInCart(item) }" @click="toggleCart(item)">
+              @click="toggleCart(item)">
+                 <div class="relative">
+                  <svg :class="{ 'opacity-60': !isInCart(item) }" class="absolute top-5 left-5 fill-[#00DA64]" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.9999 0.647217C6.1922 0.647217 0.646973 6.19245 0.646973 13.0002C0.646973 19.8079 6.1922 25.3531 12.9999 25.3531C19.8076 25.3531 25.3529 19.8079 25.3529 13.0002C25.3529 6.19245 19.8076 0.647217 12.9999 0.647217ZM12.9999 3.1178C18.4724 3.1178 22.8823 7.52765 22.8823 13.0002C22.8823 18.4727 18.4724 22.8825 12.9999 22.8825C7.52741 22.8825 3.11756 18.4727 3.11756 13.0002C3.11756 7.52765 7.52741 3.1178 12.9999 3.1178ZM12.9999 5.58839C8.90615 5.58839 5.58815 8.90639 5.58815 13.0002C5.58815 17.0939 8.90615 20.4119 12.9999 20.4119C17.0937 20.4119 20.4117 17.0939 20.4117 13.0002C20.4117 12.0515 20.2262 11.1487 19.9026 10.3148L12.9999 17.2175L8.42064 12.6383L10.1674 10.8915L12.9999 13.724L18.5853 8.1386C17.2265 6.57966 15.2309 5.58839 12.9999 5.58839Z" fill="#00DA64"/>
+</svg>
               <img :src="prettyImg(item.preview_uri, item.image_url)" @error="setErrorImg" alt="" class="rounded-lg"/>
+                 </div>
               <div class="pt-4 text-black space-y-3">
                 <div class="font-bold text-xl">{{ item.token_name }}</div>
                 <div class="flex justify-between items-center">
@@ -355,7 +361,6 @@ export default {
         )
         .then((res) => res.data.splice(0, 20));
     this.collection_nfts = collection_nfts;
-    this.cart_nfts = collection_nfts.slice(0, 3);
     const res = await Promise.allSettled(
         collection_nfts.map((x) => {
           return this.$axios.$get(pretty_url(x.token_uri), {timeout: 3000});
@@ -378,6 +383,9 @@ export default {
     isInCart(token) {
       return this.cart_nfts.includes(token)
     },
+    totalItemsInCart() {
+      return this.cart_nfts.length
+    }, 
     clearCart() {
       this.cart_nfts = []
     },
