@@ -34,6 +34,7 @@ export default async function (context: Context, inject: Inject) {
         network: $apt.adapter.network,
         wallet: network
       })
+      context.store.commit('config/SET_MODAL', null)
       // @ts-ignore
       if (callback) {
         // @ts-ignore
