@@ -46,6 +46,7 @@ export default async function (context: Context, inject: Inject) {
   $apt.setAuth = (auth) => {
     context.app.$ck.set('apt_wallet', auth.wallet);
     context.store.dispatch("auth/setAuth", auth);
+    context.store.commit('config/SET_MODAL', null);
   }
 
   $apt.disconnect = () => {
