@@ -189,17 +189,16 @@
       <div>
         <div class="max-w-6xl mx-auto space-y-10">
           <div class="grid md:grid-cols-4 gap-4">
-            <div v-for="item in collection_nfts" :key="item.token_name" class="p-3 cursor-pointer bg-white rounded-xl"
-              @click="toggleCart(item)">
-                 <div class="relative">
-                  <svg :class="{ 'opacity-60': !isInCart(item) }" class="absolute top-5 left-5 fill-[#00DA64]" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div v-for="item in collection_nfts" :key="item.token_name" class="p-3 cursor-pointer bg-white rounded-xl">
+                 <div class="relative" @click="toggleCart(item)">
+                  <svg :class="{ 'opacity-60': !isInCart(item) }" class="absolute top-3 left-3 fill-[#00DA64]" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M12.9999 0.647217C6.1922 0.647217 0.646973 6.19245 0.646973 13.0002C0.646973 19.8079 6.1922 25.3531 12.9999 25.3531C19.8076 25.3531 25.3529 19.8079 25.3529 13.0002C25.3529 6.19245 19.8076 0.647217 12.9999 0.647217ZM12.9999 3.1178C18.4724 3.1178 22.8823 7.52765 22.8823 13.0002C22.8823 18.4727 18.4724 22.8825 12.9999 22.8825C7.52741 22.8825 3.11756 18.4727 3.11756 13.0002C3.11756 7.52765 7.52741 3.1178 12.9999 3.1178ZM12.9999 5.58839C8.90615 5.58839 5.58815 8.90639 5.58815 13.0002C5.58815 17.0939 8.90615 20.4119 12.9999 20.4119C17.0937 20.4119 20.4117 17.0939 20.4117 13.0002C20.4117 12.0515 20.2262 11.1487 19.9026 10.3148L12.9999 17.2175L8.42064 12.6383L10.1674 10.8915L12.9999 13.724L18.5853 8.1386C17.2265 6.57966 15.2309 5.58839 12.9999 5.58839Z" fill="#00DA64"/>
 </svg>
               <img :src="prettyImg(item.preview_uri, item.image_url)" @error="setErrorImg" alt="" class="rounded-lg"/>
                  </div>
               <div class="pt-4 text-black space-y-3">
                 <div class="font-bold text-xl">{{ item.token_name }}</div>
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-center" @click="toggleCart(item)">
                   <div class="flex justify-end gap-2 font-bold items-center">
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
