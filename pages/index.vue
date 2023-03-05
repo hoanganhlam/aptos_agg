@@ -21,7 +21,7 @@
               <img src="/home/lending/line.png" alt="">
             </div>
           </nuxt-link>
-          <nuxt-link to="/discovery" class="flex items-end">
+          <nuxt-link to="/staking" class="flex items-end">
             <div>
               <img src="/home/staking/line.png" alt="">
             </div>
