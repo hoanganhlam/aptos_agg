@@ -37,13 +37,13 @@
             <span>203</span>
           </div>
         </div>
-        <div class="flex items-center justify-between">
+        <div v-if="!short" class="flex items-center justify-between">
           <div>Your NFT Staked:</div>
           <div class="flex font-bold">
             <span>1</span>
           </div>
         </div>
-        <div class="bg-[#E9E9E9] rounded-[10px] p-4 flex items-end justify-between">
+        <div v-if="!short" class="bg-[#E9E9E9] rounded-[10px] p-4 flex items-end justify-between">
           <div class="space-y-2">
             <div>Earned</div>
             <div class="font-bold">40 APT</div>
@@ -53,7 +53,7 @@
             <div class="rounded bg-[#808080] cursor-pointer py-1 text-white p-2">Claim</div>
           </div>
         </div>
-        <div class="grid grid-cols-2 gap-4 text-center">
+        <div v-if="!short" class="grid grid-cols-2 gap-4 text-center">
           <div class="flex items-center justify-center gap-2 text-white fill-white rainbow-button rounded-full p-2 px-4">
             <span>Stake NFT</span>
           </div>
@@ -61,7 +61,10 @@
             <span>Unstake NFT</span>
           </div>
         </div>
-        <p class="text-[#808080] text-center">Ends in: 21d 4h 55m 23s</p>
+        <div v-else class="flex items-center justify-center gap-2 text-white fill-white rainbow-button rounded-full p-2 px-4">
+          <span>Go to Pool</span>
+        </div>
+        <p v-if="!short" class="text-[#808080] text-center">Ends in: 21d 4h 55m 23s</p>
       </div>
     </div>
   </div>
@@ -69,7 +72,13 @@
 
 <script>
 export default {
-  name: "StakingCard"
+  name: "StakingCard",
+  props: {
+    short: {
+      type: Boolean,
+      default: false
+    }
+  }
 }
 </script>
 

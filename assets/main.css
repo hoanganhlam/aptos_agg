@@ -18,3 +18,7 @@ body {
 .tippy-backdrop {
   background: transparent!important;
 }
+
+.rainbow-button {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(92.7deg, #E53636 -5.56%, #AF4CDD 13.32%, #615EFE 37.92%, #84E399 59.09%, #FEDB60 82.55%, #FE6060 104.3%);
+}
